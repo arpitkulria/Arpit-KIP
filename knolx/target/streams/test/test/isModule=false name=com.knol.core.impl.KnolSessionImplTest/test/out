@@ -1,0 +1,9 @@
+[0m[[0minfo[0m] [0m[32mKnolSessionImplTest:[0m[0m
+[0m[[0minfo[0m] [0m[32m- create a test[0m[0m
+[0m[[0minfo[0m] [0m[33m- create a test for getting catch (pending)[0m[0m
+[0m[[0minfo[0m] [0m[32m- test for delete[0m[0m
+[0m[[0minfo[0m] [0m[32m- test for delete for getting catch[0m[0m
+[0m[[0minfo[0m] [0m[32m- test for update[0m[0m
+[0m[[0minfo[0m] [0m[32m- test for getEmp[0m[0m
+[0m[[0minfo[0m] [0m[32m- test for getList[0m[0m
+[0m[[0minfo[0m] [0m[32m- test for getSessionByEmpID[0m[0m
