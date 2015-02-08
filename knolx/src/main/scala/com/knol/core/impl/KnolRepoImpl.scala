@@ -68,10 +68,7 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
           }
         }
       }
-      case None => {
-        logger.debug("Exception in update")
-        zero
-      }
+      case None => zero
     }
   }
   /**
@@ -94,10 +91,7 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
           }
         }
       }
-      case None => {
-        logger.debug("Exception in update")
-        zero
-      }
+      case None => zero
     }
   }
   /**
@@ -127,10 +121,7 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
           }
         }
       }
-      case None => {
-        logger.debug("Exception in update")
-        None
-      }
+      case None => None
     }
   }
   /**
@@ -157,10 +148,7 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
           }
         }
       }
-      case None => {
-        logger.debug("Exception in update")
-        None
-      }
+      case None => None
     }
   }
 }

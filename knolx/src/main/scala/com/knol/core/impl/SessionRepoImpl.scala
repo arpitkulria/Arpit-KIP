@@ -7,7 +7,7 @@ import java.sql.PreparedStatement
 import java.sql.Statement
 
 class SessionRepoImpl extends SessionRepo with DBConnection {
-  val zero=0
+  val zero = 0
   val one = 1
   val two = 2
   val three = 3
@@ -60,10 +60,7 @@ class SessionRepoImpl extends SessionRepo with DBConnection {
           }
         }
       }
-      case None => {
-        logger.debug("Exception in update")
-        zero
-      }
+      case None => zero
     }
   }
   def delete(id: Int): Int = {
@@ -73,7 +70,7 @@ class SessionRepoImpl extends SessionRepo with DBConnection {
         try {
           var query = "delete from knolx where knol_id=" + id
           val st: PreparedStatement = con.prepareStatement(query)
-          require(st.executeUpdate()>zero)
+          require(st.executeUpdate() > zero)
           one
         } catch {
           case ex: Exception => {
@@ -82,8 +79,8 @@ class SessionRepoImpl extends SessionRepo with DBConnection {
           }
         }
       }
-      case None =>zero
-      
+      case None => zero
+
     }
   }
   def getSession(id: Int): Option[KnolSession] = {
@@ -107,10 +104,7 @@ class SessionRepoImpl extends SessionRepo with DBConnection {
           }
         }
       }
-      case None => {
-        logger.debug("Exception in Showing")
-        None
-      }
+      case None => None
     }
   }
   def getList(): Option[scala.collection.mutable.MutableList[KnolSession]] = {
@@ -129,14 +123,11 @@ class SessionRepoImpl extends SessionRepo with DBConnection {
         } catch {
           case ex: Exception => {
             logger.error("Error in getList", ex)
-            None // TODO: handle error
+            None
           }
         }
       }
-      case None => {
-        logger.debug("Exception in getting list")
-        None
-      }
+      case None => None
     }
 
   }
