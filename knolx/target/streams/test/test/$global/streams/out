@@ -1,9 +1,9 @@
-[0m[[0mdebug[0m] [0mRunning TaskDef(com.knol.core.impl.KnolSessionImplTest, org.scalatest.tools.Framework$$anon$1@23a36fdc, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(com.knol.core.impl.KnolRepoImplTest, org.scalatest.tools.Framework$$anon$1@23a36fdc, false, [SuiteSelector])[0m
-[0m[[0minfo[0m] [0m[36mRun completed in 8 seconds, 861 milliseconds.[0m[0m
-[0m[[0minfo[0m] [0m[36mTotal number of tests run: 15[0m[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(com.knol.core.impl.KnolSessionImplTest, org.scalatest.tools.Framework$$anon$1@2eecf0f7, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(com.knol.core.impl.KnolRepoImplTest, org.scalatest.tools.Framework$$anon$1@2eecf0f7, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0m[36mRun completed in 8 seconds, 74 milliseconds.[0m[0m
+[0m[[0minfo[0m] [0m[36mTotal number of tests run: 16[0m[0m
 [0m[[0minfo[0m] [0m[36mSuites: completed 2, aborted 0[0m[0m
-[0m[[0minfo[0m] [0m[36mTests: succeeded 15, failed 0, canceled 0, ignored 0, pending 2[0m[0m
+[0m[[0minfo[0m] [0m[36mTests: succeeded 16, failed 0, canceled 0, ignored 0, pending 2[0m[0m
 [0m[[0minfo[0m] [0m[32mAll tests passed.[0m[0m
 [0m[[0mdebug[0m] [0mPassed tests:[0m
 [0m[[0mdebug[0m] [0m	com.knol.core.impl.KnolRepoImplTest[0m

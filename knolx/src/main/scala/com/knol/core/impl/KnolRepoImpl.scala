@@ -9,11 +9,11 @@ import com.knol.db.connection.DBConnection
 import org.slf4j.LoggerFactory
 /**importing for logger*/
 class KnolRepoImpl extends DBConnection with KnolRepo {
-    val zero=0
-          val one=1
-          val two=2
-          val three=3
-          val four=4
+  val zero = 0
+  val one = 1
+  val two = 2
+  val three = 3
+  val four = 4
   /**
    * create method Implementation  for creating a employee in "knol" table.
    *  it will take KnolEmp as argument and will return int of option type.. the returned value will be last inserted ID in the table
@@ -23,7 +23,6 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
     conn match {
       case Some(conn) => {
         try {
-        
           val query = "insert into knol(name,emailid,mobile)values(?, ?, ?);";
           val stmt: PreparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
           stmt.setString(one, empObj.name)
@@ -52,7 +51,6 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
     con match {
       case Some(con) => {
         try {
-         
           var query = "update knol set name=?,emailid=?,mobile=? where knol_id=?;"
           val st: PreparedStatement = con.prepareStatement(query)
           st.setString(one, empObj.name)
@@ -82,7 +80,7 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
         try {
           var query = "delete from knol where knol_id=" + id
           val st: PreparedStatement = con.prepareStatement(query)
-          require(st.executeUpdate()==one)
+          require(st.executeUpdate() == one)
           one
         } catch {
           case ex: Exception => {
@@ -104,8 +102,7 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
     con match {
       case Some(con) => {
         try {
-        
-          var query = "select * from knol where knol_id=" + id + ";"
+          var query = "select * from knol where knol_id=" + id
           var stmt: Statement = con.createStatement()
           var rs: ResultSet = stmt.executeQuery(query)
           rs.next()
@@ -132,7 +129,6 @@ class KnolRepoImpl extends DBConnection with KnolRepo {
     con match {
       case Some(con) => {
         try {
-        
           var query = "select * from knol;"
           var stmt: Statement = con.createStatement();
           var rs: ResultSet = stmt.executeQuery(query);

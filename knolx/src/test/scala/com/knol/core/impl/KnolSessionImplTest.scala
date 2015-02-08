@@ -153,5 +153,11 @@ class KnolSessionImplTest extends FunSuite with BeforeAndAfter with DBConnection
     assert(output === Some(scala.collection.mutable.MutableList(GetSessionById(1, "Arpit", "arpit@knoldus.com", "777", 1, "scala", "2014-12-12"))))
 
   }
+    test("test for getSessionByEmpID for getting catch") {
+
+    val output = getSessionByEmpID.sessionByEmp(10)
+    assert(output === None)
+
+  }
 
 }

@@ -38,40 +38,36 @@
 </span>13 <span style=''>    val five = </span><span style='background: #AEF1AE'>5</span><span style=''>
 </span>14 <span style=''>    val six = </span><span style='background: #AEF1AE'>6</span><span style=''>
 </span>15 <span style=''>    val seven = </span><span style='background: #AEF1AE'>7</span><span style=''>
-</span>16 <span style=''>    val msg= </span><span style='background: #AEF1AE'>"Error in SessionEmp method"</span><span style=''>
+</span>16 <span style=''>    val msg = </span><span style='background: #AEF1AE'>"Error in SessionEmp method"</span><span style=''>
 </span>17 <span style=''>
 </span>18 <span style=''>    val conn = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
 </span>19 <span style=''>
 </span>20 <span style=''>    conn match {
 </span>21 <span style=''>      case Some(conn) => {
 </span>22 <span style=''>        try {
-</span>23 <span style=''>          
-</span>24 <span style=''>
-</span>25 <span style=''>          </span><span style='background: #AEF1AE'>val query = "select knol.knol_id, knol.name,knol.emailid,knol.mobile,knolx.id as 'sessionID', knolx.topic,knolx.date from knol, knolx" +
-</span>26 <span style=''></span><span style='background: #AEF1AE'>            " where knolx.knol_id=" + empId
-</span>27 <span style=''></span><span style='background: #AEF1AE'>            val stmt: PreparedStatement = conn.prepareStatement(query)
-</span>28 <span style=''></span><span style='background: #AEF1AE'>          var rs: ResultSet = stmt.executeQuery(query);
-</span>29 <span style=''></span><span style='background: #AEF1AE'>          val x = scala.collection.mutable.MutableList[GetSessionById]()
+</span>23 <span style=''>          </span><span style='background: #AEF1AE'>val query = "select knol.knol_id, knol.name,knol.emailid,knol.mobile,knolx.id as 'sessionID', knolx.topic,knolx.date from knol, knolx" +
+</span>24 <span style=''></span><span style='background: #AEF1AE'>            " where knolx.knol_id=" + empId
+</span>25 <span style=''></span><span style='background: #AEF1AE'>          val stmt: PreparedStatement = conn.prepareStatement(query)
+</span>26 <span style=''></span><span style='background: #AEF1AE'>          var rs: ResultSet = stmt.executeQuery(query);
+</span>27 <span style=''></span><span style='background: #AEF1AE'>          val x = scala.collection.mutable.MutableList[GetSessionById]()
+</span>28 <span style=''></span><span style='background: #AEF1AE'>
+</span>29 <span style=''></span><span style='background: #AEF1AE'>          while (rs.next()) {
 </span>30 <span style=''></span><span style='background: #AEF1AE'>
-</span>31 <span style=''></span><span style='background: #AEF1AE'>          while (rs.next()) {
-</span>32 <span style=''></span><span style='background: #AEF1AE'>
-</span>33 <span style=''></span><span style='background: #AEF1AE'>            x += GetSessionById(rs.getInt(one),rs.getString(two),rs.getString(three),rs.getString(four),rs.getInt(five),rs.getString(six),rs.getString(seven))
-</span>34 <span style=''></span><span style='background: #AEF1AE'>          }
-</span>35 <span style=''></span><span style='background: #AEF1AE'>
-</span>36 <span style=''></span><span style='background: #AEF1AE'>          Some(x)</span><span style=''>
-</span>37 <span style=''>        } catch {
-</span>38 <span style=''>          case ex: Exception => {
-</span>39 <span style=''>            </span><span style='background: #F0ADAD'>logger.error( msg,ex.printStackTrace())</span><span style=''>
-</span>40 <span style=''>            </span><span style='background: #F0ADAD'>None</span><span style=''>
-</span>41 <span style=''>          }
-</span>42 <span style=''>        }
-</span>43 <span style=''>      }
-</span>44 <span style=''>      case None =>
-</span>45 <span style=''>        </span><span style='background: #F0ADAD'>logger.error("entered in none case")</span><span style=''>
-</span>46 <span style=''>        </span><span style='background: #F0ADAD'>None</span><span style=''>
-</span>47 <span style=''>    }
-</span>48 <span style=''>  }
-</span>49 <span style=''>}
+</span>31 <span style=''></span><span style='background: #AEF1AE'>            x += GetSessionById(rs.getInt(one), rs.getString(two), rs.getString(three), rs.getString(four), rs.getInt(five), rs.getString(six), rs.getString(seven))
+</span>32 <span style=''></span><span style='background: #AEF1AE'>          }
+</span>33 <span style=''></span><span style='background: #AEF1AE'>          require(x.size > 0)
+</span>34 <span style=''></span><span style='background: #AEF1AE'>          Some(x)</span><span style=''>
+</span>35 <span style=''>        } catch {
+</span>36 <span style=''>          case ex: Exception => {
+</span>37 <span style=''>            </span><span style='background: #AEF1AE'>logger.error(msg, ex.printStackTrace())</span><span style=''>
+</span>38 <span style=''>            </span><span style='background: #AEF1AE'>None</span><span style=''>
+</span>39 <span style=''>          }
+</span>40 <span style=''>        }
+</span>41 <span style=''>      }
+</span>42 <span style=''>      case None => </span><span style='background: #F0ADAD'>None</span><span style=''>
+</span>43 <span style=''>    }
+</span>44 <span style=''>  }
+</span>45 <span style=''>}
 </span></pre>
           </div>
           <div class="tab-pane" id="statementlist">
@@ -238,9 +234,9 @@
           8
         </td>
         <td>
-          477
+          478
           -
-          505
+          506
         </td>
         <td>
           Literal
@@ -259,9 +255,9 @@
           9
         </td>
         <td>
-          522
+          523
           -
-          537
+          538
         </td>
         <td>
           Apply
@@ -277,12 +273,12 @@
           22
         </td>
         <td>
-          29
+          31
         </td>
         <td>
-          619
+          608
           -
-          1221
+          1243
         </td>
         <td>
           Block
@@ -305,20 +301,21 @@
     else
       ()
   };
+  scala.this.Predef.require(x.size.&gt;(0));
   scala.Some.apply[scala.collection.mutable.MutableList[com.knol.core.GetSessionById]](x)
 }
         </td>
       </tr><tr>
         <td>
-          26
+          24
         </td>
         <td>
           10
         </td>
         <td>
-          631
+          620
           -
-          799
+          788
         </td>
         <td>
           Apply
@@ -331,15 +328,15 @@
         </td>
       </tr><tr>
         <td>
-          27
+          25
         </td>
         <td>
           11
         </td>
         <td>
-          842
+          829
           -
-          870
+          857
         </td>
         <td>
           Apply
@@ -352,15 +349,15 @@
         </td>
       </tr><tr>
         <td>
-          28
+          26
         </td>
         <td>
           12
         </td>
         <td>
-          901
+          888
           -
-          925
+          912
         </td>
         <td>
           Apply
@@ -373,15 +370,15 @@
         </td>
       </tr><tr>
         <td>
-          29
+          27
         </td>
         <td>
           13
         </td>
         <td>
-          945
+          932
           -
-          999
+          986
         </td>
         <td>
           Apply
@@ -394,15 +391,15 @@
         </td>
       </tr><tr>
         <td>
-          31
+          29
         </td>
         <td>
           26
         </td>
         <td>
-          1011
+          998
           -
-          1011
+          998
         </td>
         <td>
           Literal
@@ -415,15 +412,15 @@
         </td>
       </tr><tr>
         <td>
-          31
+          29
         </td>
         <td>
           14
         </td>
         <td>
-          1018
+          1005
           -
-          1027
+          1014
         </td>
         <td>
           Apply
@@ -436,15 +433,15 @@
         </td>
       </tr><tr>
         <td>
-          31
+          29
         </td>
         <td>
           25
         </td>
         <td>
-          1044
+          1031
           -
-          1190
+          1183
         </td>
         <td>
           Block
@@ -460,15 +457,15 @@
         </td>
       </tr><tr>
         <td>
-          31
+          29
         </td>
         <td>
           27
         </td>
         <td>
-          1011
+          998
           -
-          1011
+          998
         </td>
         <td>
           Block
@@ -481,15 +478,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           23
         </td>
         <td>
-          1044
+          1031
           -
-          1190
+          1183
         </td>
         <td>
           Apply
@@ -502,15 +499,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           17
         </td>
         <td>
-          1097
+          1086
           -
-          1116
+          1105
         </td>
         <td>
           Apply
@@ -523,15 +520,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           20
         </td>
         <td>
-          1152
+          1144
           -
-          1169
+          1161
         </td>
         <td>
           Apply
@@ -544,15 +541,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           22
         </td>
         <td>
-          1049
+          1036
           -
-          1190
+          1183
         </td>
         <td>
           Apply
@@ -565,15 +562,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           16
         </td>
         <td>
-          1079
+          1067
           -
-          1096
+          1084
         </td>
         <td>
           Apply
@@ -586,15 +583,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           19
         </td>
         <td>
-          1136
+          1127
           -
-          1151
+          1142
         </td>
         <td>
           Apply
@@ -607,15 +604,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           18
         </td>
         <td>
-          1117
+          1107
           -
-          1135
+          1125
         </td>
         <td>
           Apply
@@ -628,15 +625,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           21
         </td>
         <td>
-          1170
+          1163
           -
-          1189
+          1182
         </td>
         <td>
           Apply
@@ -649,15 +646,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           15
         </td>
         <td>
-          1064
+          1051
           -
-          1078
+          1065
         </td>
         <td>
           Apply
@@ -670,15 +667,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          31
         </td>
         <td>
           24
         </td>
         <td>
-          1046
+          1033
           -
-          1046
+          1033
         </td>
         <td>
           Apply
@@ -691,7 +688,28 @@
         </td>
       </tr><tr>
         <td>
-          36
+          33
+        </td>
+        <td>
+          29
+        </td>
+        <td>
+          1206
+          -
+          1225
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Predef.require
+        </td>
+        <td style="background: #AEF1AE">
+          scala.this.Predef.require(x.size.&gt;(0))
+        </td>
+      </tr><tr>
+        <td>
+          33
         </td>
         <td>
           28
@@ -699,7 +717,28 @@
         <td>
           1214
           -
-          1221
+          1224
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.&gt;
+        </td>
+        <td style="background: #AEF1AE">
+          x.size.&gt;(0)
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          30
+        </td>
+        <td>
+          1236
+          -
+          1243
         </td>
         <td>
           Apply
@@ -712,36 +751,15 @@
         </td>
       </tr><tr>
         <td>
-          39
+          37
         </td>
         <td>
-          31
+          32
         </td>
         <td>
-          1286
+          1326
           -
-          1325
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          org.slf4j.Logger.error
-        </td>
-        <td style="background: #F0ADAD">
-          GetSesssionListImpl.this.logger.error(msg, ex.printStackTrace())
-        </td>
-      </tr><tr>
-        <td>
-          39
-        </td>
-        <td>
-          30
-        </td>
-        <td>
-          1304
-          -
-          1324
+          1346
         </td>
         <td>
           Apply
@@ -749,41 +767,20 @@
         <td>
           java.lang.Throwable.printStackTrace
         </td>
-        <td style="background: #F0ADAD">
+        <td style="background: #AEF1AE">
           ex.printStackTrace()
         </td>
       </tr><tr>
         <td>
-          40
-        </td>
-        <td>
-          32
-        </td>
-        <td>
-          1338
-          -
-          1342
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          scala.None
-        </td>
-        <td style="background: #F0ADAD">
-          scala.None
-        </td>
-      </tr><tr>
-        <td>
-          45
+          37
         </td>
         <td>
           33
         </td>
         <td>
-          1400
+          1308
           -
-          1436
+          1347
         </td>
         <td>
           Apply
@@ -791,20 +788,41 @@
         <td>
           org.slf4j.Logger.error
         </td>
-        <td style="background: #F0ADAD">
-          GetSesssionListImpl.this.logger.error(&quot;entered in none case&quot;)
+        <td style="background: #AEF1AE">
+          GetSesssionListImpl.this.logger.error(msg, ex.printStackTrace())
         </td>
       </tr><tr>
         <td>
-          46
+          38
         </td>
         <td>
           34
         </td>
         <td>
-          1445
+          1360
           -
-          1449
+          1364
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          scala.None
+        </td>
+        <td style="background: #AEF1AE">
+          scala.None
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          35
+        </td>
+        <td>
+          1414
+          -
+          1418
         </td>
         <td>
           Select

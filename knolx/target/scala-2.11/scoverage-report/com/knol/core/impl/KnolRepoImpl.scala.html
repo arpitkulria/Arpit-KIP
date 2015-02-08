@@ -34,11 +34,11 @@
 </span>9 <span style=''>import org.slf4j.LoggerFactory
 </span>10 <span style=''>/**importing for logger*/
 </span>11 <span style=''>class KnolRepoImpl extends DBConnection with KnolRepo {
-</span>12 <span style=''>    val zero=</span><span style='background: #AEF1AE'>0</span><span style=''>
-</span>13 <span style=''>          val one=</span><span style='background: #AEF1AE'>1</span><span style=''>
-</span>14 <span style=''>          val two=</span><span style='background: #AEF1AE'>2</span><span style=''>
-</span>15 <span style=''>          val three=</span><span style='background: #AEF1AE'>3</span><span style=''>
-</span>16 <span style=''>          val four=</span><span style='background: #AEF1AE'>4</span><span style=''>
+</span>12 <span style=''>  val zero = </span><span style='background: #AEF1AE'>0</span><span style=''>
+</span>13 <span style=''>  val one = </span><span style='background: #AEF1AE'>1</span><span style=''>
+</span>14 <span style=''>  val two = </span><span style='background: #AEF1AE'>2</span><span style=''>
+</span>15 <span style=''>  val three = </span><span style='background: #AEF1AE'>3</span><span style=''>
+</span>16 <span style=''>  val four = </span><span style='background: #AEF1AE'>4</span><span style=''>
 </span>17 <span style=''>  /**
 </span>18 <span style=''>   * create method Implementation  for creating a employee in "knol" table.
 </span>19 <span style=''>   *  it will take KnolEmp as argument and will return int of option type.. the returned value will be last inserted ID in the table
@@ -48,135 +48,131 @@
 </span>23 <span style=''>    conn match {
 </span>24 <span style=''>      case Some(conn) => {
 </span>25 <span style=''>        try {
-</span>26 <span style=''>        
-</span>27 <span style=''>          </span><span style='background: #AEF1AE'>val query = "insert into knol(name,emailid,mobile)values(?, ?, ?);";
-</span>28 <span style=''></span><span style='background: #AEF1AE'>          val stmt: PreparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
-</span>29 <span style=''></span><span style='background: #AEF1AE'>          stmt.setString(one, empObj.name)
-</span>30 <span style=''></span><span style='background: #AEF1AE'>          stmt.setString(two, empObj.emailid)
-</span>31 <span style=''></span><span style='background: #AEF1AE'>          stmt.setString(three, empObj.mobile)
-</span>32 <span style=''></span><span style='background: #AEF1AE'>          val a = stmt.executeUpdate();
-</span>33 <span style=''></span><span style='background: #AEF1AE'>          val rs: ResultSet = stmt.getGeneratedKeys();
-</span>34 <span style=''></span><span style='background: #AEF1AE'>          rs.next()
-</span>35 <span style=''></span><span style='background: #AEF1AE'>          Some(rs.getInt(1))</span><span style=''>
-</span>36 <span style=''>        } catch {
-</span>37 <span style=''>          case ex: Exception => {
-</span>38 <span style=''>            </span><span style='background: #AEF1AE'>logger.error("Error in create method", ex)</span><span style=''>
-</span>39 <span style=''>            </span><span style='background: #AEF1AE'>None</span><span style=''>
-</span>40 <span style=''>          }
-</span>41 <span style=''>        }
-</span>42 <span style=''>      }
-</span>43 <span style=''>      case None => </span><span style='background: #F0ADAD'>None</span><span style=''>
-</span>44 <span style=''>    }
-</span>45 <span style=''>  }
-</span>46 <span style=''>  /**
-</span>47 <span style=''>   * update method will be updating a record in knol table and by its knol_id and will take knolEmp type of object in which new data of that emp
-</span>48 <span style=''>   * will be saved.. and will return Int. 1 for success and 0 for fail
-</span>49 <span style=''>   */
-</span>50 <span style=''>  def update(empObj: KnolEmp): Int = {
-</span>51 <span style=''>    val con = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
-</span>52 <span style=''>    con match {
-</span>53 <span style=''>      case Some(con) => {
-</span>54 <span style=''>        try {
-</span>55 <span style=''>         
-</span>56 <span style=''>          </span><span style='background: #AEF1AE'>var query = "update knol set name=?,emailid=?,mobile=? where knol_id=?;"
-</span>57 <span style=''></span><span style='background: #AEF1AE'>          val st: PreparedStatement = con.prepareStatement(query)
-</span>58 <span style=''></span><span style='background: #AEF1AE'>          st.setString(one, empObj.name)
-</span>59 <span style=''></span><span style='background: #AEF1AE'>          st.setString(two, empObj.emailid)
-</span>60 <span style=''></span><span style='background: #AEF1AE'>          st.setString(three, empObj.mobile)
-</span>61 <span style=''></span><span style='background: #AEF1AE'>          st.setInt(four, empObj.id)
-</span>62 <span style=''></span><span style='background: #AEF1AE'>          st.executeUpdate();
-</span>63 <span style=''></span><span style='background: #AEF1AE'>          one</span><span style=''>
-</span>64 <span style=''>        } catch {
-</span>65 <span style=''>          case ex: Exception => {
-</span>66 <span style=''>            </span><span style='background: #F0ADAD'>logger.error("error in update: ", ex)</span><span style=''>
-</span>67 <span style=''>            </span><span style='background: #F0ADAD'>zero</span><span style=''>
-</span>68 <span style=''>          }
-</span>69 <span style=''>        }
-</span>70 <span style=''>      }
-</span>71 <span style=''>      case None => </span><span style='background: #F0ADAD'>zero</span><span style=''>
-</span>72 <span style=''>    }
-</span>73 <span style=''>  }
-</span>74 <span style=''>  /**
-</span>75 <span style=''>   * this delete method will delete any emp record from the knol table by its given knol_id.
-</span>76 <span style=''>   * and will return Int type of value 1 for success and 0 for fail
-</span>77 <span style=''>   */
-</span>78 <span style=''>  def delete(id: Int): Int = {
-</span>79 <span style=''>    val con = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
-</span>80 <span style=''>    con match {
-</span>81 <span style=''>      case Some(con) => {
-</span>82 <span style=''>        try {
-</span>83 <span style=''>          </span><span style='background: #AEF1AE'>var query = "delete from knol where knol_id=" + id
-</span>84 <span style=''></span><span style='background: #AEF1AE'>          val st: PreparedStatement = con.prepareStatement(query)
-</span>85 <span style=''></span><span style='background: #AEF1AE'>          require(st.executeUpdate()==one)
-</span>86 <span style=''></span><span style='background: #AEF1AE'>          one</span><span style=''>
-</span>87 <span style=''>        } catch {
-</span>88 <span style=''>          case ex: Exception => {
-</span>89 <span style=''>            </span><span style='background: #AEF1AE'>logger.error("error in delete method: ", ex)</span><span style=''>
-</span>90 <span style=''>            </span><span style='background: #AEF1AE'>zero</span><span style=''>
-</span>91 <span style=''>          }
-</span>92 <span style=''>        }
-</span>93 <span style=''>      }
-</span>94 <span style=''>      case None => </span><span style='background: #F0ADAD'>zero</span><span style=''>
-</span>95 <span style=''>    }
-</span>96 <span style=''>  }
-</span>97 <span style=''>  /**
-</span>98 <span style=''>   * this getEmp method will show the data of any given emp in the knol table.
-</span>99 <span style=''>   * and will take emp's id(knol_id) as a argument and will return all the corresponding data in the form of object of KnolEmp.
-</span>100 <span style=''>   * and this will be returned in Option type.
-</span>101 <span style=''>   */
-</span>102 <span style=''>  def getEmp(id: Int): Option[KnolEmp] = {
-</span>103 <span style=''>    val con = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
-</span>104 <span style=''>    con match {
-</span>105 <span style=''>      case Some(con) => {
-</span>106 <span style=''>        try {
-</span>107 <span style=''>        
-</span>108 <span style=''>          </span><span style='background: #AEF1AE'>var query = "select * from knol where knol_id=" + id + ";"
-</span>109 <span style=''></span><span style='background: #AEF1AE'>          var stmt: Statement = con.createStatement()
-</span>110 <span style=''></span><span style='background: #AEF1AE'>          var rs: ResultSet = stmt.executeQuery(query)
-</span>111 <span style=''></span><span style='background: #AEF1AE'>          rs.next()
-</span>112 <span style=''></span><span style='background: #AEF1AE'>          val idshow = rs.getInt(one)
-</span>113 <span style=''></span><span style='background: #AEF1AE'>          val name = rs.getString(two)
-</span>114 <span style=''></span><span style='background: #AEF1AE'>          val emailid = rs.getString(three)
-</span>115 <span style=''></span><span style='background: #AEF1AE'>          val mobile = rs.getString(four)
-</span>116 <span style=''></span><span style='background: #AEF1AE'>          Some(KnolEmp(idshow, name, emailid, mobile))</span><span style=''>
-</span>117 <span style=''>        } catch {
-</span>118 <span style=''>          case ex: Exception => {
-</span>119 <span style=''>            </span><span style='background: #AEF1AE'>logger.error("Error in getEmp", ex)</span><span style=''>
-</span>120 <span style=''>            </span><span style='background: #AEF1AE'>None</span><span style=''>
-</span>121 <span style=''>          }
-</span>122 <span style=''>        }
-</span>123 <span style=''>      }
-</span>124 <span style=''>      case None => </span><span style='background: #F0ADAD'>None</span><span style=''>
-</span>125 <span style=''>    }
-</span>126 <span style=''>  }
-</span>127 <span style=''>  /**
-</span>128 <span style=''>   * this method getList will return all the data which is in the knol table in the form of mutableLIst of KnolEmp's objects
-</span>129 <span style=''>   */
-</span>130 <span style=''>  def getList(): Option[scala.collection.mutable.MutableList[KnolEmp]] = {
-</span>131 <span style=''>    val con = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
-</span>132 <span style=''>    con match {
-</span>133 <span style=''>      case Some(con) => {
-</span>134 <span style=''>        try {
-</span>135 <span style=''>        
-</span>136 <span style=''>          </span><span style='background: #AEF1AE'>var query = "select * from knol;"
-</span>137 <span style=''></span><span style='background: #AEF1AE'>          var stmt: Statement = con.createStatement();
-</span>138 <span style=''></span><span style='background: #AEF1AE'>          var rs: ResultSet = stmt.executeQuery(query);
-</span>139 <span style=''></span><span style='background: #AEF1AE'>          val x = scala.collection.mutable.MutableList[KnolEmp]()
-</span>140 <span style=''></span><span style='background: #AEF1AE'>          while (rs.next()) {
-</span>141 <span style=''></span><span style='background: #AEF1AE'>            x += KnolEmp(rs.getInt(one), rs.getString(two), rs.getString(three), rs.getString(four))
-</span>142 <span style=''></span><span style='background: #AEF1AE'>          }
-</span>143 <span style=''></span><span style='background: #AEF1AE'>          Some(x)</span><span style=''>
-</span>144 <span style=''>        } catch {
-</span>145 <span style=''>          case ex: Exception => {
-</span>146 <span style=''>            </span><span style='background: #F0ADAD'>logger.error("Error in getList", ex)</span><span style=''>
-</span>147 <span style=''>            </span><span style='background: #F0ADAD'>None</span><span style=''> // TODO: handle error
-</span>148 <span style=''>          }
-</span>149 <span style=''>        }
-</span>150 <span style=''>      }
-</span>151 <span style=''>      case None => </span><span style='background: #F0ADAD'>None</span><span style=''>
-</span>152 <span style=''>    }
-</span>153 <span style=''>  }
-</span>154 <span style=''>}
+</span>26 <span style=''>          </span><span style='background: #AEF1AE'>val query = "insert into knol(name,emailid,mobile)values(?, ?, ?);";
+</span>27 <span style=''></span><span style='background: #AEF1AE'>          val stmt: PreparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
+</span>28 <span style=''></span><span style='background: #AEF1AE'>          stmt.setString(one, empObj.name)
+</span>29 <span style=''></span><span style='background: #AEF1AE'>          stmt.setString(two, empObj.emailid)
+</span>30 <span style=''></span><span style='background: #AEF1AE'>          stmt.setString(three, empObj.mobile)
+</span>31 <span style=''></span><span style='background: #AEF1AE'>          val a = stmt.executeUpdate();
+</span>32 <span style=''></span><span style='background: #AEF1AE'>          val rs: ResultSet = stmt.getGeneratedKeys();
+</span>33 <span style=''></span><span style='background: #AEF1AE'>          rs.next()
+</span>34 <span style=''></span><span style='background: #AEF1AE'>          Some(rs.getInt(1))</span><span style=''>
+</span>35 <span style=''>        } catch {
+</span>36 <span style=''>          case ex: Exception => {
+</span>37 <span style=''>            </span><span style='background: #AEF1AE'>logger.error("Error in create method", ex)</span><span style=''>
+</span>38 <span style=''>            </span><span style='background: #AEF1AE'>None</span><span style=''>
+</span>39 <span style=''>          }
+</span>40 <span style=''>        }
+</span>41 <span style=''>      }
+</span>42 <span style=''>      case None => </span><span style='background: #F0ADAD'>None</span><span style=''>
+</span>43 <span style=''>    }
+</span>44 <span style=''>  }
+</span>45 <span style=''>  /**
+</span>46 <span style=''>   * update method will be updating a record in knol table and by its knol_id and will take knolEmp type of object in which new data of that emp
+</span>47 <span style=''>   * will be saved.. and will return Int. 1 for success and 0 for fail
+</span>48 <span style=''>   */
+</span>49 <span style=''>  def update(empObj: KnolEmp): Int = {
+</span>50 <span style=''>    val con = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
+</span>51 <span style=''>    con match {
+</span>52 <span style=''>      case Some(con) => {
+</span>53 <span style=''>        try {
+</span>54 <span style=''>          </span><span style='background: #AEF1AE'>var query = "update knol set name=?,emailid=?,mobile=? where knol_id=?;"
+</span>55 <span style=''></span><span style='background: #AEF1AE'>          val st: PreparedStatement = con.prepareStatement(query)
+</span>56 <span style=''></span><span style='background: #AEF1AE'>          st.setString(one, empObj.name)
+</span>57 <span style=''></span><span style='background: #AEF1AE'>          st.setString(two, empObj.emailid)
+</span>58 <span style=''></span><span style='background: #AEF1AE'>          st.setString(three, empObj.mobile)
+</span>59 <span style=''></span><span style='background: #AEF1AE'>          st.setInt(four, empObj.id)
+</span>60 <span style=''></span><span style='background: #AEF1AE'>          st.executeUpdate();
+</span>61 <span style=''></span><span style='background: #AEF1AE'>          one</span><span style=''>
+</span>62 <span style=''>        } catch {
+</span>63 <span style=''>          case ex: Exception => {
+</span>64 <span style=''>            </span><span style='background: #F0ADAD'>logger.error("error in update: ", ex)</span><span style=''>
+</span>65 <span style=''>            </span><span style='background: #F0ADAD'>zero</span><span style=''>
+</span>66 <span style=''>          }
+</span>67 <span style=''>        }
+</span>68 <span style=''>      }
+</span>69 <span style=''>      case None => </span><span style='background: #F0ADAD'>zero</span><span style=''>
+</span>70 <span style=''>    }
+</span>71 <span style=''>  }
+</span>72 <span style=''>  /**
+</span>73 <span style=''>   * this delete method will delete any emp record from the knol table by its given knol_id.
+</span>74 <span style=''>   * and will return Int type of value 1 for success and 0 for fail
+</span>75 <span style=''>   */
+</span>76 <span style=''>  def delete(id: Int): Int = {
+</span>77 <span style=''>    val con = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
+</span>78 <span style=''>    con match {
+</span>79 <span style=''>      case Some(con) => {
+</span>80 <span style=''>        try {
+</span>81 <span style=''>          </span><span style='background: #AEF1AE'>var query = "delete from knol where knol_id=" + id
+</span>82 <span style=''></span><span style='background: #AEF1AE'>          val st: PreparedStatement = con.prepareStatement(query)
+</span>83 <span style=''></span><span style='background: #AEF1AE'>          require(st.executeUpdate() == one)
+</span>84 <span style=''></span><span style='background: #AEF1AE'>          one</span><span style=''>
+</span>85 <span style=''>        } catch {
+</span>86 <span style=''>          case ex: Exception => {
+</span>87 <span style=''>            </span><span style='background: #AEF1AE'>logger.error("error in delete method: ", ex)</span><span style=''>
+</span>88 <span style=''>            </span><span style='background: #AEF1AE'>zero</span><span style=''>
+</span>89 <span style=''>          }
+</span>90 <span style=''>        }
+</span>91 <span style=''>      }
+</span>92 <span style=''>      case None => </span><span style='background: #F0ADAD'>zero</span><span style=''>
+</span>93 <span style=''>    }
+</span>94 <span style=''>  }
+</span>95 <span style=''>  /**
+</span>96 <span style=''>   * this getEmp method will show the data of any given emp in the knol table.
+</span>97 <span style=''>   * and will take emp's id(knol_id) as a argument and will return all the corresponding data in the form of object of KnolEmp.
+</span>98 <span style=''>   * and this will be returned in Option type.
+</span>99 <span style=''>   */
+</span>100 <span style=''>  def getEmp(id: Int): Option[KnolEmp] = {
+</span>101 <span style=''>    val con = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
+</span>102 <span style=''>    con match {
+</span>103 <span style=''>      case Some(con) => {
+</span>104 <span style=''>        try {
+</span>105 <span style=''>          </span><span style='background: #AEF1AE'>var query = "select * from knol where knol_id=" + id
+</span>106 <span style=''></span><span style='background: #AEF1AE'>          var stmt: Statement = con.createStatement()
+</span>107 <span style=''></span><span style='background: #AEF1AE'>          var rs: ResultSet = stmt.executeQuery(query)
+</span>108 <span style=''></span><span style='background: #AEF1AE'>          rs.next()
+</span>109 <span style=''></span><span style='background: #AEF1AE'>          val idshow = rs.getInt(one)
+</span>110 <span style=''></span><span style='background: #AEF1AE'>          val name = rs.getString(two)
+</span>111 <span style=''></span><span style='background: #AEF1AE'>          val emailid = rs.getString(three)
+</span>112 <span style=''></span><span style='background: #AEF1AE'>          val mobile = rs.getString(four)
+</span>113 <span style=''></span><span style='background: #AEF1AE'>          Some(KnolEmp(idshow, name, emailid, mobile))</span><span style=''>
+</span>114 <span style=''>        } catch {
+</span>115 <span style=''>          case ex: Exception => {
+</span>116 <span style=''>            </span><span style='background: #AEF1AE'>logger.error("Error in getEmp", ex)</span><span style=''>
+</span>117 <span style=''>            </span><span style='background: #AEF1AE'>None</span><span style=''>
+</span>118 <span style=''>          }
+</span>119 <span style=''>        }
+</span>120 <span style=''>      }
+</span>121 <span style=''>      case None => </span><span style='background: #F0ADAD'>None</span><span style=''>
+</span>122 <span style=''>    }
+</span>123 <span style=''>  }
+</span>124 <span style=''>  /**
+</span>125 <span style=''>   * this method getList will return all the data which is in the knol table in the form of mutableLIst of KnolEmp's objects
+</span>126 <span style=''>   */
+</span>127 <span style=''>  def getList(): Option[scala.collection.mutable.MutableList[KnolEmp]] = {
+</span>128 <span style=''>    val con = </span><span style='background: #AEF1AE'>getConnection()</span><span style=''>
+</span>129 <span style=''>    con match {
+</span>130 <span style=''>      case Some(con) => {
+</span>131 <span style=''>        try {
+</span>132 <span style=''>          </span><span style='background: #AEF1AE'>var query = "select * from knol;"
+</span>133 <span style=''></span><span style='background: #AEF1AE'>          var stmt: Statement = con.createStatement();
+</span>134 <span style=''></span><span style='background: #AEF1AE'>          var rs: ResultSet = stmt.executeQuery(query);
+</span>135 <span style=''></span><span style='background: #AEF1AE'>          val x = scala.collection.mutable.MutableList[KnolEmp]()
+</span>136 <span style=''></span><span style='background: #AEF1AE'>          while (rs.next()) {
+</span>137 <span style=''></span><span style='background: #AEF1AE'>            x += KnolEmp(rs.getInt(one), rs.getString(two), rs.getString(three), rs.getString(four))
+</span>138 <span style=''></span><span style='background: #AEF1AE'>          }
+</span>139 <span style=''></span><span style='background: #AEF1AE'>          Some(x)</span><span style=''>
+</span>140 <span style=''>        } catch {
+</span>141 <span style=''>          case ex: Exception => {
+</span>142 <span style=''>            </span><span style='background: #F0ADAD'>logger.error("Error in getList", ex)</span><span style=''>
+</span>143 <span style=''>            </span><span style='background: #F0ADAD'>None</span><span style=''> // TODO: handle error
+</span>144 <span style=''>          }
+</span>145 <span style=''>        }
+</span>146 <span style=''>      }
+</span>147 <span style=''>      case None => </span><span style='background: #F0ADAD'>None</span><span style=''>
+</span>148 <span style=''>    }
+</span>149 <span style=''>  }
+</span>150 <span style=''>}
 </span></pre>
           </div>
           <div class="tab-pane" id="statementlist">
@@ -193,7 +189,7 @@
           12
         </td>
         <td>
-          35
+          36
         </td>
         <td>
           368
@@ -214,12 +210,12 @@
           13
         </td>
         <td>
-          36
+          37
         </td>
         <td>
-          388
+          382
           -
-          389
+          383
         </td>
         <td>
           Literal
@@ -235,12 +231,12 @@
           14
         </td>
         <td>
-          37
+          38
         </td>
         <td>
-          408
+          396
           -
-          409
+          397
         </td>
         <td>
           Literal
@@ -256,12 +252,12 @@
           15
         </td>
         <td>
-          38
+          39
         </td>
         <td>
-          430
+          412
           -
-          431
+          413
         </td>
         <td>
           Literal
@@ -277,12 +273,12 @@
           16
         </td>
         <td>
-          39
+          40
         </td>
         <td>
-          451
+          427
           -
-          452
+          428
         </td>
         <td>
           Literal
@@ -298,12 +294,12 @@
           22
         </td>
         <td>
-          40
+          41
         </td>
         <td>
-          736
+          712
           -
-          751
+          727
         </td>
         <td>
           Apply
@@ -319,12 +315,12 @@
           25
         </td>
         <td>
-          57
+          58
         </td>
         <td>
-          829
+          796
           -
-          1279
+          1246
         </td>
         <td>
           Block
@@ -347,15 +343,15 @@
         </td>
       </tr><tr>
         <td>
-          27
+          26
         </td>
         <td>
-          41
+          42
         </td>
         <td>
-          841
+          808
           -
-          896
+          863
         </td>
         <td>
           Literal
@@ -368,15 +364,15 @@
         </td>
       </tr><tr>
         <td>
-          28
+          27
         </td>
         <td>
-          42
+          43
         </td>
         <td>
-          938
+          905
           -
-          999
+          966
         </td>
         <td>
           Apply
@@ -389,15 +385,57 @@
         </td>
       </tr><tr>
         <td>
-          29
+          28
         </td>
         <td>
           44
         </td>
         <td>
-          1030
+          992
           -
-          1041
+          995
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          com.knol.core.impl.KnolRepoImpl.one
+        </td>
+        <td style="background: #AEF1AE">
+          KnolRepoImpl.this.one
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          46
+        </td>
+        <td>
+          977
+          -
+          1009
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.sql.PreparedStatement.setString
+        </td>
+        <td style="background: #AEF1AE">
+          stmt.setString(KnolRepoImpl.this.one, empObj.name)
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          45
+        </td>
+        <td>
+          997
+          -
+          1008
         </td>
         <td>
           Select
@@ -413,33 +451,33 @@
           29
         </td>
         <td>
-          43
+          47
         </td>
         <td>
-          1025
+          1035
           -
-          1028
+          1038
         </td>
         <td>
           Select
         </td>
         <td>
-          com.knol.core.impl.KnolRepoImpl.one
+          com.knol.core.impl.KnolRepoImpl.two
         </td>
         <td style="background: #AEF1AE">
-          KnolRepoImpl.this.one
+          KnolRepoImpl.this.two
         </td>
       </tr><tr>
         <td>
           29
         </td>
         <td>
-          45
+          49
         </td>
         <td>
-          1010
+          1020
           -
-          1042
+          1055
         </td>
         <td>
           Apply
@@ -448,19 +486,19 @@
           java.sql.PreparedStatement.setString
         </td>
         <td style="background: #AEF1AE">
-          stmt.setString(KnolRepoImpl.this.one, empObj.name)
+          stmt.setString(KnolRepoImpl.this.two, empObj.emailid)
         </td>
       </tr><tr>
         <td>
-          30
+          29
         </td>
         <td>
-          47
+          48
         </td>
         <td>
-          1073
+          1040
           -
-          1087
+          1054
         </td>
         <td>
           Select
@@ -476,33 +514,33 @@
           30
         </td>
         <td>
-          46
+          50
         </td>
         <td>
-          1068
+          1081
           -
-          1071
+          1086
         </td>
         <td>
           Select
         </td>
         <td>
-          com.knol.core.impl.KnolRepoImpl.two
+          com.knol.core.impl.KnolRepoImpl.three
         </td>
         <td style="background: #AEF1AE">
-          KnolRepoImpl.this.two
+          KnolRepoImpl.this.three
         </td>
       </tr><tr>
         <td>
           30
         </td>
         <td>
-          48
+          52
         </td>
         <td>
-          1053
+          1066
           -
-          1088
+          1102
         </td>
         <td>
           Apply
@@ -511,19 +549,19 @@
           java.sql.PreparedStatement.setString
         </td>
         <td style="background: #AEF1AE">
-          stmt.setString(KnolRepoImpl.this.two, empObj.emailid)
+          stmt.setString(KnolRepoImpl.this.three, empObj.mobile)
         </td>
       </tr><tr>
         <td>
-          31
+          30
         </td>
         <td>
-          50
+          51
         </td>
         <td>
-          1121
+          1088
           -
-          1134
+          1101
         </td>
         <td>
           Select
@@ -539,54 +577,12 @@
           31
         </td>
         <td>
-          49
+          53
         </td>
         <td>
-          1114
+          1121
           -
-          1119
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          com.knol.core.impl.KnolRepoImpl.three
-        </td>
-        <td style="background: #AEF1AE">
-          KnolRepoImpl.this.three
-        </td>
-      </tr><tr>
-        <td>
-          31
-        </td>
-        <td>
-          51
-        </td>
-        <td>
-          1099
-          -
-          1135
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.sql.PreparedStatement.setString
-        </td>
-        <td style="background: #AEF1AE">
-          stmt.setString(KnolRepoImpl.this.three, empObj.mobile)
-        </td>
-      </tr><tr>
-        <td>
-          32
-        </td>
-        <td>
-          52
-        </td>
-        <td>
-          1154
-          -
-          1174
+          1141
         </td>
         <td>
           Apply
@@ -599,15 +595,15 @@
         </td>
       </tr><tr>
         <td>
-          33
+          32
         </td>
         <td>
-          53
+          54
         </td>
         <td>
-          1206
+          1173
           -
-          1229
+          1196
         </td>
         <td>
           Apply
@@ -620,15 +616,15 @@
         </td>
       </tr><tr>
         <td>
-          34
+          33
         </td>
         <td>
-          54
+          55
         </td>
         <td>
-          1241
+          1208
           -
-          1250
+          1217
         </td>
         <td>
           Apply
@@ -641,36 +637,15 @@
         </td>
       </tr><tr>
         <td>
-          35
+          34
         </td>
         <td>
           56
         </td>
         <td>
-          1261
+          1233
           -
-          1279
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Some.apply
-        </td>
-        <td style="background: #AEF1AE">
-          scala.Some.apply[Int](rs.getInt(1))
-        </td>
-      </tr><tr>
-        <td>
-          35
-        </td>
-        <td>
-          55
-        </td>
-        <td>
-          1266
-          -
-          1278
+          1245
         </td>
         <td>
           Apply
@@ -683,15 +658,36 @@
         </td>
       </tr><tr>
         <td>
-          38
+          34
         </td>
         <td>
-          58
+          57
         </td>
         <td>
-          1344
+          1228
           -
-          1386
+          1246
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Some.apply
+        </td>
+        <td style="background: #AEF1AE">
+          scala.Some.apply[Int](rs.getInt(1))
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          59
+        </td>
+        <td>
+          1311
+          -
+          1353
         </td>
         <td>
           Apply
@@ -704,15 +700,15 @@
         </td>
       </tr><tr>
         <td>
-          39
+          38
         </td>
         <td>
-          59
+          60
         </td>
         <td>
-          1399
+          1366
           -
-          1403
+          1370
         </td>
         <td>
           Select
@@ -725,15 +721,15 @@
         </td>
       </tr><tr>
         <td>
-          43
+          42
         </td>
         <td>
-          60
+          61
         </td>
         <td>
-          1453
+          1420
           -
-          1457
+          1424
         </td>
         <td>
           Select
@@ -746,15 +742,15 @@
         </td>
       </tr><tr>
         <td>
-          51
+          50
         </td>
         <td>
-          61
+          62
         </td>
         <td>
-          1749
+          1716
           -
-          1764
+          1731
         </td>
         <td>
           Apply
@@ -767,15 +763,15 @@
         </td>
       </tr><tr>
         <td>
-          54
+          53
         </td>
         <td>
-          78
+          79
         </td>
         <td>
-          1841
+          1798
           -
-          2190
+          2147
         </td>
         <td>
           Block
@@ -797,15 +793,15 @@
         </td>
       </tr><tr>
         <td>
-          56
+          54
         </td>
         <td>
-          62
+          63
         </td>
         <td>
-          1853
+          1810
           -
-          1913
+          1870
         </td>
         <td>
           Literal
@@ -818,15 +814,15 @@
         </td>
       </tr><tr>
         <td>
-          57
+          55
         </td>
         <td>
-          63
+          64
         </td>
         <td>
-          1952
+          1909
           -
-          1979
+          1936
         </td>
         <td>
           Apply
@@ -839,36 +835,15 @@
         </td>
       </tr><tr>
         <td>
-          58
+          56
         </td>
         <td>
           65
         </td>
         <td>
-          2008
+          1960
           -
-          2019
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          com.knol.core.impl.KnolEmp.name
-        </td>
-        <td style="background: #AEF1AE">
-          empObj.name
-        </td>
-      </tr><tr>
-        <td>
-          58
-        </td>
-        <td>
-          64
-        </td>
-        <td>
-          2003
-          -
-          2006
+          1963
         </td>
         <td>
           Select
@@ -881,15 +856,15 @@
         </td>
       </tr><tr>
         <td>
-          58
+          56
         </td>
         <td>
-          66
+          67
         </td>
         <td>
-          1990
+          1947
           -
-          2020
+          1977
         </td>
         <td>
           Apply
@@ -902,36 +877,36 @@
         </td>
       </tr><tr>
         <td>
-          59
+          56
         </td>
         <td>
-          68
+          66
         </td>
         <td>
-          2049
+          1965
           -
-          2063
+          1976
         </td>
         <td>
           Select
         </td>
         <td>
-          com.knol.core.impl.KnolEmp.emailid
+          com.knol.core.impl.KnolEmp.name
         </td>
         <td style="background: #AEF1AE">
-          empObj.emailid
+          empObj.name
         </td>
       </tr><tr>
         <td>
-          59
+          57
         </td>
         <td>
-          67
+          68
         </td>
         <td>
-          2044
+          2001
           -
-          2047
+          2004
         </td>
         <td>
           Select
@@ -944,15 +919,15 @@
         </td>
       </tr><tr>
         <td>
-          59
+          57
         </td>
         <td>
-          69
+          70
         </td>
         <td>
-          2031
+          1988
           -
-          2064
+          2021
         </td>
         <td>
           Apply
@@ -965,36 +940,36 @@
         </td>
       </tr><tr>
         <td>
-          60
+          57
         </td>
         <td>
-          71
+          69
         </td>
         <td>
-          2095
+          2006
           -
-          2108
+          2020
         </td>
         <td>
           Select
         </td>
         <td>
-          com.knol.core.impl.KnolEmp.mobile
+          com.knol.core.impl.KnolEmp.emailid
         </td>
         <td style="background: #AEF1AE">
-          empObj.mobile
+          empObj.emailid
         </td>
       </tr><tr>
         <td>
-          60
+          58
         </td>
         <td>
-          70
+          71
         </td>
         <td>
-          2088
+          2045
           -
-          2093
+          2050
         </td>
         <td>
           Select
@@ -1007,15 +982,15 @@
         </td>
       </tr><tr>
         <td>
-          60
+          58
         </td>
         <td>
-          72
+          73
         </td>
         <td>
-          2075
+          2032
           -
-          2109
+          2066
         </td>
         <td>
           Apply
@@ -1028,36 +1003,36 @@
         </td>
       </tr><tr>
         <td>
-          61
+          58
         </td>
         <td>
-          74
+          72
         </td>
         <td>
-          2136
+          2052
           -
-          2145
+          2065
         </td>
         <td>
           Select
         </td>
         <td>
-          com.knol.core.impl.KnolEmp.id
+          com.knol.core.impl.KnolEmp.mobile
         </td>
         <td style="background: #AEF1AE">
-          empObj.id
+          empObj.mobile
         </td>
       </tr><tr>
         <td>
-          61
+          59
         </td>
         <td>
-          73
+          74
         </td>
         <td>
-          2130
+          2087
           -
-          2134
+          2091
         </td>
         <td>
           Select
@@ -1070,15 +1045,15 @@
         </td>
       </tr><tr>
         <td>
-          61
+          59
         </td>
         <td>
-          75
+          76
         </td>
         <td>
-          2120
+          2077
           -
-          2146
+          2103
         </td>
         <td>
           Apply
@@ -1091,15 +1066,36 @@
         </td>
       </tr><tr>
         <td>
-          62
+          59
         </td>
         <td>
-          76
+          75
         </td>
         <td>
-          2157
+          2093
           -
-          2175
+          2102
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          com.knol.core.impl.KnolEmp.id
+        </td>
+        <td style="background: #AEF1AE">
+          empObj.id
+        </td>
+      </tr><tr>
+        <td>
+          60
+        </td>
+        <td>
+          77
+        </td>
+        <td>
+          2114
+          -
+          2132
         </td>
         <td>
           Apply
@@ -1112,15 +1108,15 @@
         </td>
       </tr><tr>
         <td>
-          63
+          61
         </td>
         <td>
-          77
+          78
         </td>
         <td>
-          2187
+          2144
           -
-          2190
+          2147
         </td>
         <td>
           Select
@@ -1133,15 +1129,15 @@
         </td>
       </tr><tr>
         <td>
-          66
+          64
         </td>
         <td>
-          79
+          80
         </td>
         <td>
-          2255
+          2212
           -
-          2292
+          2249
         </td>
         <td>
           Apply
@@ -1154,36 +1150,15 @@
         </td>
       </tr><tr>
         <td>
-          67
-        </td>
-        <td>
-          80
-        </td>
-        <td>
-          2305
-          -
-          2309
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          com.knol.core.impl.KnolRepoImpl.zero
-        </td>
-        <td style="background: #F0ADAD">
-          KnolRepoImpl.this.zero
-        </td>
-      </tr><tr>
-        <td>
-          71
+          65
         </td>
         <td>
           81
         </td>
         <td>
-          2359
+          2262
           -
-          2363
+          2266
         </td>
         <td>
           Select
@@ -1196,15 +1171,36 @@
         </td>
       </tr><tr>
         <td>
-          79
+          69
         </td>
         <td>
           82
         </td>
         <td>
-          2592
+          2316
           -
-          2607
+          2320
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          com.knol.core.impl.KnolRepoImpl.zero
+        </td>
+        <td style="background: #F0ADAD">
+          KnolRepoImpl.this.zero
+        </td>
+      </tr><tr>
+        <td>
+          77
+        </td>
+        <td>
+          83
+        </td>
+        <td>
+          2549
+          -
+          2564
         </td>
         <td>
           Apply
@@ -1217,15 +1213,15 @@
         </td>
       </tr><tr>
         <td>
-          82
+          80
         </td>
         <td>
-          89
+          90
         </td>
         <td>
-          2674
+          2631
           -
-          2847
+          2806
         </td>
         <td>
           Block
@@ -1243,15 +1239,15 @@
         </td>
       </tr><tr>
         <td>
-          83
+          81
         </td>
         <td>
-          83
+          84
         </td>
         <td>
-          2686
+          2643
           -
-          2724
+          2681
         </td>
         <td>
           Apply
@@ -1264,15 +1260,15 @@
         </td>
       </tr><tr>
         <td>
-          84
+          82
         </td>
         <td>
-          84
+          85
         </td>
         <td>
-          2763
+          2720
           -
-          2790
+          2747
         </td>
         <td>
           Apply
@@ -1285,36 +1281,15 @@
         </td>
       </tr><tr>
         <td>
-          85
+          83
         </td>
         <td>
           86
         </td>
         <td>
-          2809
+          2788
           -
-          2832
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          scala.Int.==
-        </td>
-        <td style="background: #AEF1AE">
-          st.executeUpdate().==(KnolRepoImpl.this.one)
-        </td>
-      </tr><tr>
-        <td>
-          85
-        </td>
-        <td>
-          85
-        </td>
-        <td>
-          2829
-          -
-          2832
+          2791
         </td>
         <td>
           Select
@@ -1327,15 +1302,15 @@
         </td>
       </tr><tr>
         <td>
-          85
+          83
         </td>
         <td>
-          87
+          88
         </td>
         <td>
-          2801
+          2758
           -
-          2833
+          2792
         </td>
         <td>
           Apply
@@ -1348,15 +1323,36 @@
         </td>
       </tr><tr>
         <td>
-          86
+          83
         </td>
         <td>
-          88
+          87
         </td>
         <td>
-          2844
+          2766
           -
-          2847
+          2791
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          scala.Int.==
+        </td>
+        <td style="background: #AEF1AE">
+          st.executeUpdate().==(KnolRepoImpl.this.one)
+        </td>
+      </tr><tr>
+        <td>
+          84
+        </td>
+        <td>
+          89
+        </td>
+        <td>
+          2803
+          -
+          2806
         </td>
         <td>
           Select
@@ -1369,15 +1365,15 @@
         </td>
       </tr><tr>
         <td>
-          89
+          87
         </td>
         <td>
-          90
+          91
         </td>
         <td>
-          2912
+          2871
           -
-          2956
+          2915
         </td>
         <td>
           Apply
@@ -1390,15 +1386,15 @@
         </td>
       </tr><tr>
         <td>
-          90
+          88
         </td>
         <td>
-          91
+          92
         </td>
         <td>
-          2969
+          2928
           -
-          2973
+          2932
         </td>
         <td>
           Select
@@ -1411,15 +1407,15 @@
         </td>
       </tr><tr>
         <td>
-          94
-        </td>
-        <td>
           92
         </td>
         <td>
-          3023
+          93
+        </td>
+        <td>
+          2982
           -
-          3027
+          2986
         </td>
         <td>
           Select
@@ -1432,15 +1428,15 @@
         </td>
       </tr><tr>
         <td>
-          103
+          101
         </td>
         <td>
-          93
+          94
         </td>
         <td>
-          3361
+          3320
           -
-          3376
+          3335
         </td>
         <td>
           Apply
@@ -1453,15 +1449,15 @@
         </td>
       </tr><tr>
         <td>
-          106
+          104
         </td>
         <td>
-          108
+          109
         </td>
         <td>
-          3452
+          3402
           -
-          3857
+          3801
         </td>
         <td>
           Block
@@ -1471,7 +1467,7 @@
         </td>
         <td style="background: #AEF1AE">
           {
-  var query: String = &quot;select * from knol where knol_id=&quot;.+(id).+(&quot;;&quot;);
+  var query: String = &quot;select * from knol where knol_id=&quot;.+(id);
   var stmt: java.sql.Statement = con.createStatement();
   var rs: java.sql.ResultSet = stmt.executeQuery(query);
   rs.next();
@@ -1484,15 +1480,15 @@
         </td>
       </tr><tr>
         <td>
-          108
+          105
         </td>
         <td>
-          94
+          95
         </td>
         <td>
-          3464
+          3414
           -
-          3510
+          3454
         </td>
         <td>
           Apply
@@ -1501,19 +1497,19 @@
           java.lang.String.+
         </td>
         <td style="background: #AEF1AE">
-          &quot;select * from knol where knol_id=&quot;.+(id).+(&quot;;&quot;)
+          &quot;select * from knol where knol_id=&quot;.+(id)
         </td>
       </tr><tr>
         <td>
-          109
+          106
         </td>
         <td>
-          95
+          96
         </td>
         <td>
-          3543
+          3487
           -
-          3564
+          3508
         </td>
         <td>
           Apply
@@ -1526,15 +1522,15 @@
         </td>
       </tr><tr>
         <td>
-          110
+          107
         </td>
         <td>
-          96
+          97
         </td>
         <td>
-          3595
+          3539
           -
-          3619
+          3563
         </td>
         <td>
           Apply
@@ -1547,15 +1543,15 @@
         </td>
       </tr><tr>
         <td>
-          111
+          108
         </td>
         <td>
-          97
+          98
         </td>
         <td>
-          3630
+          3574
           -
-          3639
+          3583
         </td>
         <td>
           Apply
@@ -1568,36 +1564,15 @@
         </td>
       </tr><tr>
         <td>
-          112
+          109
         </td>
         <td>
-          98
+          100
         </td>
         <td>
-          3673
+          3607
           -
-          3676
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          com.knol.core.impl.KnolRepoImpl.one
-        </td>
-        <td style="background: #AEF1AE">
-          KnolRepoImpl.this.one
-        </td>
-      </tr><tr>
-        <td>
-          112
-        </td>
-        <td>
-          99
-        </td>
-        <td>
-          3663
-          -
-          3677
+          3621
         </td>
         <td>
           Apply
@@ -1610,36 +1585,36 @@
         </td>
       </tr><tr>
         <td>
-          113
+          109
+        </td>
+        <td>
+          99
+        </td>
+        <td>
+          3617
+          -
+          3620
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          com.knol.core.impl.KnolRepoImpl.one
+        </td>
+        <td style="background: #AEF1AE">
+          KnolRepoImpl.this.one
+        </td>
+      </tr><tr>
+        <td>
+          110
         </td>
         <td>
           101
         </td>
         <td>
-          3699
+          3656
           -
-          3716
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.sql.ResultSet.getString
-        </td>
-        <td style="background: #AEF1AE">
-          rs.getString(KnolRepoImpl.this.two)
-        </td>
-      </tr><tr>
-        <td>
-          113
-        </td>
-        <td>
-          100
-        </td>
-        <td>
-          3712
-          -
-          3715
+          3659
         </td>
         <td>
           Select
@@ -1652,15 +1627,36 @@
         </td>
       </tr><tr>
         <td>
-          114
+          110
         </td>
         <td>
-          103
+          102
         </td>
         <td>
-          3741
+          3643
           -
-          3760
+          3660
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.sql.ResultSet.getString
+        </td>
+        <td style="background: #AEF1AE">
+          rs.getString(KnolRepoImpl.this.two)
+        </td>
+      </tr><tr>
+        <td>
+          111
+        </td>
+        <td>
+          104
+        </td>
+        <td>
+          3685
+          -
+          3704
         </td>
         <td>
           Apply
@@ -1673,15 +1669,15 @@
         </td>
       </tr><tr>
         <td>
-          114
+          111
         </td>
         <td>
-          102
+          103
         </td>
         <td>
-          3754
+          3698
           -
-          3759
+          3703
         </td>
         <td>
           Select
@@ -1694,36 +1690,15 @@
         </td>
       </tr><tr>
         <td>
-          115
+          112
         </td>
         <td>
-          104
+          106
         </td>
         <td>
-          3797
+          3728
           -
-          3801
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          com.knol.core.impl.KnolRepoImpl.four
-        </td>
-        <td style="background: #AEF1AE">
-          KnolRepoImpl.this.four
-        </td>
-      </tr><tr>
-        <td>
-          115
-        </td>
-        <td>
-          105
-        </td>
-        <td>
-          3784
-          -
-          3802
+          3746
         </td>
         <td>
           Apply
@@ -1736,15 +1711,57 @@
         </td>
       </tr><tr>
         <td>
-          116
+          112
+        </td>
+        <td>
+          105
+        </td>
+        <td>
+          3741
+          -
+          3745
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          com.knol.core.impl.KnolRepoImpl.four
+        </td>
+        <td style="background: #AEF1AE">
+          KnolRepoImpl.this.four
+        </td>
+      </tr><tr>
+        <td>
+          113
         </td>
         <td>
           107
         </td>
         <td>
-          3813
+          3762
           -
-          3857
+          3800
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          com.knol.core.impl.KnolEmp.apply
+        </td>
+        <td style="background: #AEF1AE">
+          KnolEmp.apply(idshow, name, emailid, mobile)
+        </td>
+      </tr><tr>
+        <td>
+          113
+        </td>
+        <td>
+          108
+        </td>
+        <td>
+          3757
+          -
+          3801
         </td>
         <td>
           Apply
@@ -1760,33 +1777,12 @@
           116
         </td>
         <td>
-          106
+          110
         </td>
         <td>
-          3818
+          3866
           -
-          3856
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          com.knol.core.impl.KnolEmp.apply
-        </td>
-        <td style="background: #AEF1AE">
-          KnolEmp.apply(idshow, name, emailid, mobile)
-        </td>
-      </tr><tr>
-        <td>
-          119
-        </td>
-        <td>
-          109
-        </td>
-        <td>
-          3922
-          -
-          3957
+          3901
         </td>
         <td>
           Apply
@@ -1799,15 +1795,15 @@
         </td>
       </tr><tr>
         <td>
-          120
+          117
         </td>
         <td>
-          110
+          111
         </td>
         <td>
-          3970
+          3914
           -
-          3974
+          3918
         </td>
         <td>
           Select
@@ -1820,15 +1816,15 @@
         </td>
       </tr><tr>
         <td>
-          124
+          121
         </td>
         <td>
-          111
+          112
         </td>
         <td>
-          4024
+          3968
           -
-          4028
+          3972
         </td>
         <td>
           Select
@@ -1841,15 +1837,15 @@
         </td>
       </tr><tr>
         <td>
-          131
+          128
         </td>
         <td>
-          112
+          113
         </td>
         <td>
-          4265
+          4209
           -
-          4280
+          4224
         </td>
         <td>
           Apply
@@ -1862,15 +1858,15 @@
         </td>
       </tr><tr>
         <td>
+          131
+        </td>
+        <td>
           134
         </td>
         <td>
-          133
-        </td>
-        <td>
-          4356
+          4291
           -
-          4727
+          4662
         </td>
         <td>
           Block
@@ -1898,15 +1894,15 @@
         </td>
       </tr><tr>
         <td>
-          136
+          132
         </td>
         <td>
-          113
+          114
         </td>
         <td>
-          4368
+          4303
           -
-          4389
+          4324
         </td>
         <td>
           Literal
@@ -1919,15 +1915,15 @@
         </td>
       </tr><tr>
         <td>
-          137
+          133
         </td>
         <td>
-          114
+          115
         </td>
         <td>
-          4422
+          4357
           -
-          4443
+          4378
         </td>
         <td>
           Apply
@@ -1940,15 +1936,15 @@
         </td>
       </tr><tr>
         <td>
-          138
+          134
         </td>
         <td>
-          115
+          116
         </td>
         <td>
-          4475
+          4410
           -
-          4499
+          4434
         </td>
         <td>
           Apply
@@ -1961,15 +1957,15 @@
         </td>
       </tr><tr>
         <td>
-          139
+          135
         </td>
         <td>
-          116
+          117
         </td>
         <td>
-          4519
+          4454
           -
-          4566
+          4501
         </td>
         <td>
           Apply
@@ -1982,36 +1978,15 @@
         </td>
       </tr><tr>
         <td>
-          140
+          136
         </td>
         <td>
           131
         </td>
         <td>
-          4577
+          4512
           -
-          4577
-        </td>
-        <td>
-          Block
-        </td>
-        <td>
-          &lt;nosymbol&gt;
-        </td>
-        <td style="background: #AEF1AE">
-          ()
-        </td>
-      </tr><tr>
-        <td>
-          140
-        </td>
-        <td>
-          130
-        </td>
-        <td>
-          4577
-          -
-          4577
+          4512
         </td>
         <td>
           Literal
@@ -2024,15 +1999,36 @@
         </td>
       </tr><tr>
         <td>
-          140
+          136
         </td>
         <td>
-          129
+          118
         </td>
         <td>
-          4609
+          4519
           -
-          4697
+          4528
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.sql.ResultSet.next
+        </td>
+        <td style="background: #AEF1AE">
+          rs.next()
+        </td>
+      </tr><tr>
+        <td>
+          136
+        </td>
+        <td>
+          130
+        </td>
+        <td>
+          4544
+          -
+          4632
         </td>
         <td>
           Block
@@ -2048,141 +2044,36 @@
         </td>
       </tr><tr>
         <td>
-          140
+          136
         </td>
         <td>
-          117
+          132
         </td>
         <td>
-          4584
+          4512
           -
-          4593
+          4512
         </td>
         <td>
-          Apply
+          Block
         </td>
         <td>
-          java.sql.ResultSet.next
+          &lt;nosymbol&gt;
         </td>
         <td style="background: #AEF1AE">
-          rs.next()
+          ()
         </td>
       </tr><tr>
         <td>
-          141
+          137
         </td>
         <td>
           119
         </td>
         <td>
-          4622
+          4567
           -
-          4636
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.sql.ResultSet.getInt
-        </td>
-        <td style="background: #AEF1AE">
-          rs.getInt(KnolRepoImpl.this.one)
-        </td>
-      </tr><tr>
-        <td>
-          141
-        </td>
-        <td>
-          128
-        </td>
-        <td>
-          4611
-          -
-          4611
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          com.knol.core.impl.KnolRepoImpl.while$1
-        </td>
-        <td style="background: #AEF1AE">
-          while$1()
-        </td>
-      </tr><tr>
-        <td>
-          141
-        </td>
-        <td>
-          122
-        </td>
-        <td>
-          4670
-          -
-          4675
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          com.knol.core.impl.KnolRepoImpl.three
-        </td>
-        <td style="background: #AEF1AE">
-          KnolRepoImpl.this.three
-        </td>
-      </tr><tr>
-        <td>
-          141
-        </td>
-        <td>
-          125
-        </td>
-        <td>
-          4678
-          -
-          4696
-        </td>
-        <td>
-          Apply
-        </td>
-        <td>
-          java.sql.ResultSet.getString
-        </td>
-        <td style="background: #AEF1AE">
-          rs.getString(KnolRepoImpl.this.four)
-        </td>
-      </tr><tr>
-        <td>
-          141
-        </td>
-        <td>
-          124
-        </td>
-        <td>
-          4691
-          -
-          4695
-        </td>
-        <td>
-          Select
-        </td>
-        <td>
-          com.knol.core.impl.KnolRepoImpl.four
-        </td>
-        <td style="background: #AEF1AE">
-          KnolRepoImpl.this.four
-        </td>
-      </tr><tr>
-        <td>
-          141
-        </td>
-        <td>
-          118
-        </td>
-        <td>
-          4632
-          -
-          4635
+          4570
         </td>
         <td>
           Select
@@ -2195,15 +2086,15 @@
         </td>
       </tr><tr>
         <td>
-          141
+          137
         </td>
         <td>
-          127
+          128
         </td>
         <td>
-          4609
+          4544
           -
-          4697
+          4632
         </td>
         <td>
           Apply
@@ -2216,15 +2107,15 @@
         </td>
       </tr><tr>
         <td>
-          141
+          137
         </td>
         <td>
-          121
+          122
         </td>
         <td>
-          4638
+          4573
           -
-          4655
+          4590
         </td>
         <td>
           Apply
@@ -2237,36 +2128,36 @@
         </td>
       </tr><tr>
         <td>
-          141
+          137
         </td>
         <td>
-          120
+          125
         </td>
         <td>
-          4651
+          4626
           -
-          4654
+          4630
         </td>
         <td>
           Select
         </td>
         <td>
-          com.knol.core.impl.KnolRepoImpl.two
+          com.knol.core.impl.KnolRepoImpl.four
         </td>
         <td style="background: #AEF1AE">
-          KnolRepoImpl.this.two
+          KnolRepoImpl.this.four
         </td>
       </tr><tr>
         <td>
-          141
+          137
         </td>
         <td>
-          123
+          124
         </td>
         <td>
-          4657
+          4592
           -
-          4676
+          4611
         </td>
         <td>
           Apply
@@ -2279,15 +2170,15 @@
         </td>
       </tr><tr>
         <td>
-          141
+          137
         </td>
         <td>
-          126
+          127
         </td>
         <td>
-          4614
+          4549
           -
-          4697
+          4632
         </td>
         <td>
           Apply
@@ -2300,15 +2191,120 @@
         </td>
       </tr><tr>
         <td>
-          143
+          137
         </td>
         <td>
-          132
+          121
         </td>
         <td>
-          4720
+          4586
           -
-          4727
+          4589
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          com.knol.core.impl.KnolRepoImpl.two
+        </td>
+        <td style="background: #AEF1AE">
+          KnolRepoImpl.this.two
+        </td>
+      </tr><tr>
+        <td>
+          137
+        </td>
+        <td>
+          129
+        </td>
+        <td>
+          4546
+          -
+          4546
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          com.knol.core.impl.KnolRepoImpl.while$1
+        </td>
+        <td style="background: #AEF1AE">
+          while$1()
+        </td>
+      </tr><tr>
+        <td>
+          137
+        </td>
+        <td>
+          120
+        </td>
+        <td>
+          4557
+          -
+          4571
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.sql.ResultSet.getInt
+        </td>
+        <td style="background: #AEF1AE">
+          rs.getInt(KnolRepoImpl.this.one)
+        </td>
+      </tr><tr>
+        <td>
+          137
+        </td>
+        <td>
+          123
+        </td>
+        <td>
+          4605
+          -
+          4610
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          com.knol.core.impl.KnolRepoImpl.three
+        </td>
+        <td style="background: #AEF1AE">
+          KnolRepoImpl.this.three
+        </td>
+      </tr><tr>
+        <td>
+          137
+        </td>
+        <td>
+          126
+        </td>
+        <td>
+          4613
+          -
+          4631
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          java.sql.ResultSet.getString
+        </td>
+        <td style="background: #AEF1AE">
+          rs.getString(KnolRepoImpl.this.four)
+        </td>
+      </tr><tr>
+        <td>
+          139
+        </td>
+        <td>
+          133
+        </td>
+        <td>
+          4655
+          -
+          4662
         </td>
         <td>
           Apply
@@ -2321,15 +2317,15 @@
         </td>
       </tr><tr>
         <td>
-          146
+          142
         </td>
         <td>
-          134
+          135
         </td>
         <td>
-          4792
+          4727
           -
-          4828
+          4763
         </td>
         <td>
           Apply
@@ -2342,15 +2338,15 @@
         </td>
       </tr><tr>
         <td>
-          147
+          143
         </td>
         <td>
-          135
+          136
         </td>
         <td>
-          4841
+          4776
           -
-          4845
+          4780
         </td>
         <td>
           Select
@@ -2363,15 +2359,15 @@
         </td>
       </tr><tr>
         <td>
-          151
+          147
         </td>
         <td>
-          136
+          137
         </td>
         <td>
-          4917
+          4852
           -
-          4921
+          4856
         </td>
         <td>
           Select
